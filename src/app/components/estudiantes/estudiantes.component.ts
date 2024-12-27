@@ -17,6 +17,11 @@ export class EstudiantesComponent {
   // Form para crear/editar
   estudianteForm: Estudiante = this.nuevoEstudianteVacio();
   editIndex: number | null = null; // null => modo “crear”
+  mostrarFormulario: boolean = false;
+
+  // (El resto del código del componente permanece igual)
+
+  
 
   // (Opcional) Podemos usar esta bandera para resaltar
   // el campo de examen de recuperación si se entró por “Nota Recuperación”.
@@ -42,13 +47,20 @@ export class EstudiantesComponent {
     };
   }
 
+  alternarFormulario(): void {
+    this.mostrarFormulario = !this.mostrarFormulario;
+  }
+ 
+
   /** Cuando se clickea “Actualizar” o “Nota Recuperación”,
    *  abrimos el mismo formulario con los datos del estudiante. */
   editarEstudiante(i: number, modoRecuperacion: boolean = false): void {
+    this.cancelarEdicion();
     this.editIndex = i;
     this.modoRecuperacion = modoRecuperacion; // Si llamamos con true, enfocamos el ER
     // Clonamos para no alterar la lista en vivo
     this.estudianteForm = { ...this.estudianteService.estudiantes[i] };
+    
   }
 
   eliminarEstudiante(i: number): void {
@@ -68,7 +80,7 @@ export class EstudiantesComponent {
       // Actualizar
       this.estudianteService.estudiantes[this.editIndex] = { ...this.estudianteForm };
     }
-
+    
     this.estudianteService.guardarEnLocalStorage();
     this.cancelarEdicion();
   }
@@ -76,6 +88,7 @@ export class EstudiantesComponent {
   cancelarEdicion(): void {
     this.editIndex = null;
     this.modoRecuperacion = false;
+    this.mostrarFormulario = !this.mostrarFormulario;
     this.estudianteForm = this.nuevoEstudianteVacio();
   }
 

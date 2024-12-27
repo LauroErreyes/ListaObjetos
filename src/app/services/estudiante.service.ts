@@ -50,7 +50,46 @@ export class EstudianteService {
       // Aun no se ha puesto la recuperación
       estadoAprobatorio: 'En recuperación'
     },
+    {
+      cedula: '0404040404',
+      nombres: 'Laura',
+      apellidos: 'Martínez',
+      sexo: 'F',
+      fechaNacimiento: '1997-11-12',
+      codigo: 'EST004',
+      parcial1: 9,
+      parcial2: 7,
+      calificacionFinal: 8,
+      estadoAprobatorio: 'Aprobado'
+    },
+    {
+      cedula: '0505050505',
+      nombres: 'Carlos',
+      apellidos: 'Hernández',
+      sexo: 'M',
+      fechaNacimiento: '2001-05-22',
+      codigo: 'EST005',
+      parcial1: 5,
+      parcial2: 6,
+      calificacionFinal: 5.5,
+      examenRecuperacion: 6.5,
+      notaDefinitiva: 6.2,
+      estadoAprobatorio: 'En recuperación'
+    },
+    {
+      cedula: '0606060606',
+      nombres: 'Sofía',
+      apellidos: 'González',
+      sexo: 'F',
+      fechaNacimiento: '1999-08-18',
+      codigo: 'EST006',
+      parcial1: 7,
+      parcial2: 6,
+      calificacionFinal: 6.5,
+      estadoAprobatorio: 'Aprobado'
+    }
   ];
+  
 
   constructor() {
     this.cargarDesdeLocalStorage();
