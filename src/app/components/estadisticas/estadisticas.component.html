@@ -1,0 +1,90 @@
+<!-- src/app/components/estadisticas/estadisticas.component.html -->
+<div class="container">
+  <div class="stats-header">
+    <h2>Estadísticas del Curso</h2>
+    <button class="btn-back" (click)="volver()">
+      <i class="fas fa-arrow-left"></i> Volver a Estudiantes
+    </button>
+  </div>
+
+  <div class="stats-grid">
+    <!-- Gráfico de Aprobación -->
+    <div class="stats-card">
+      <div class="card-header">
+        <h3>Tasa de Aprobación</h3>
+      </div>
+      <div class="chart-container">
+        <canvas #aprobacionChart></canvas>
+      </div>
+      <div class="stats-details">
+        <div class="stat-item approved">
+          <span class="label">Aprobados</span>
+          <span class="value">{{ porcentajeAprobados | number:'1.1-2' }}%</span>
+        </div>
+        <div class="stat-item failed">
+          <span class="label">Reprobados</span>
+          <span class="value">{{ porcentajeReprobados | number:'1.1-2' }}%</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Gráfico por Género -->
+    <div class="stats-card">
+      <div class="card-header">
+        <h3>Aprobación por Género</h3>
+      </div>
+      <div class="chart-container">
+        <canvas #generoChart></canvas>
+      </div>
+      <div class="stats-details">
+        <div class="stat-item male">
+          <span class="label">Hombres</span>
+          <span class="value">{{ porcentajeAprobadosHombres | number:'1.1-2' }}%</span>
+        </div>
+        <div class="stat-item female">
+          <span class="label">Mujeres</span>
+          <span class="value">{{ porcentajeAprobadosMujeres | number:'1.1-2' }}%</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Carta de Promedio -->
+    <div class="stats-card promedio-card">
+      <div class="card-header">
+        <h3>Promedio General</h3>
+      </div>
+      <div class="promedio-content">
+        <div class="promedio-circle">
+          <span class="promedio-value">{{ promedioGeneral | number:'1.1-2' }}</span>
+          <span class="promedio-label"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lista de Estudiantes -->
+  <div class="students-section">
+    <div class="section-header">
+      <h3>Estudiantes por encima del promedio</h3>
+      <span class="student-count">Total: {{ estudiantesSobrePromedio.length }}</span>
+    </div>
+    <div class="students-container">
+      <ul class="students-list" *ngIf="estudiantesSobrePromedio.length > 0">
+        <li *ngFor="let e of estudiantesSobrePromedio" class="student-item">
+          <div class="student-info">
+            <span class="student-name">{{ e.nombres }} {{ e.apellidos }}</span>
+            <span class="student-grade">
+              {{ e.notaDefinitiva != null 
+                  ? (e.notaDefinitiva | number:'1.1-2') 
+                  : (e.calificacionFinal | number:'1.1-2') }}
+            </span>
+          </div>
+        </li>
+      </ul>
+      <div class="empty-state" *ngIf="estudiantesSobrePromedio.length === 0">
+        <i class="fas fa-user-graduate"></i>
+        <p>No hay estudiantes por encima del promedio</p>
+      </div>
+    </div>
+  </div>
+</div>

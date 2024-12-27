@@ -1,0 +1,225 @@
+/* src/app/components/estadisticas/estadisticas.component.css */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  .stats-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  
+  .stats-header h2 {
+    font-size: 1.8rem;
+    color: #2c3e50;
+    margin: 0;
+  }
+  
+  .btn-back {
+    padding: 0.6rem 1.2rem;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    color: #495057;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-back:hover {
+    background-color: #e9ecef;
+    color: #212529;
+  }
+  
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .stats-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    justify-items: center;
+    overflow: hidden;
+  }
+  
+  .card-header {
+    padding: 1rem;
+    border-bottom: 1px solid #edf2f7;
+  }
+  
+  .card-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #2d3748;
+  }
+  
+  .chart-container {
+    height: 180px;
+    padding: 1rem;
+  }
+  
+  .stats-details {
+    padding: 1rem;
+    border-top: 1px solid #edf2f7;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .stat-item .label {
+    font-size: 0.9rem;
+    color: #718096;
+    margin-bottom: 0.3rem;
+  }
+  
+  .stat-item .value {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #2d3748;
+  }
+  
+  /* Estilos específicos para la carta de promedio */
+  .promedio-card {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .promedio-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+  
+  .promedio-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    box-shadow: 0 4px 6px rgba(52, 152, 219, 0.2);
+  }
+  
+  .promedio-value {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1;
+  }
+  
+  .promedio-label {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-top: 0.2rem;
+  }
+  
+  /* Estilos para la sección de estudiantes */
+  .students-section {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    padding: 1.5rem;
+    margin-top: 2rem;
+  }
+  
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .section-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #2d3748;
+  }
+  
+  .student-count {
+    background: #edf2f7;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    color: #4a5568;
+  }
+  
+  .students-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .student-item {
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+  }
+  
+  .student-item:hover {
+    background-color: #f8f9fa;
+  }
+  
+  .student-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .student-name {
+    color: #2d3748;
+    font-weight: 500;
+  }
+  
+  .student-grade {
+    background: #ebf8ff;
+    color: #3182ce;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+  
+  .empty-state {
+    text-align: center;
+    padding: 2rem;
+    color: #a0aec0;
+  }
+  
+  .empty-state i {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  @media (max-width: 768px) {
+    .stats-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .container {
+      padding: 1rem;
+    }
+    
+    .promedio-circle {
+      width: 100px;
+      height: 100px;
+    }
+    
+    .promedio-value {
+      font-size: 1.8rem;
+    }
+  }

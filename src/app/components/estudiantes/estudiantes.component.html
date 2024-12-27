@@ -1,0 +1,135 @@
+<div class="container">
+  <h2>Estudiantes</h2>
+  <button class="btn btn-info mt-2 ms-2" (click)="verEstadisticas()">
+    Ver Estadísticas
+  </button>
+  <!-- TABLA -->
+  <table class="table table-bordered mt-3">
+    <thead>
+      <tr>
+        <th>Código</th>
+        <th>Estudiante</th>
+        <th>P1</th>
+        <th>P2</th>
+        <th>CF</th>
+        <th>ER</th>
+        <th>ND</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let est of estudianteService.estudiantes; let i = index">
+        <td>{{ est.codigo }}</td>
+        <td>{{ est.nombres }} {{ est.apellidos }}</td>
+        <td>{{ est.parcial1 }}</td>
+        <td>{{ est.parcial2 }}</td>
+        <td>{{ est.calificacionFinal | number:'1.1-2' }}</td>
+        <td>{{ est.examenRecuperacion == null ? 'N/A' : est.examenRecuperacion }}</td>
+        <td>{{ est.notaDefinitiva == null ? 'N/A' : (est.notaDefinitiva | number:'1.1-2') }}</td>
+        <td [ngClass]="{
+    'text-success': est.estadoAprobatorio === 'Aprobado',
+    'text-danger': est.estadoAprobatorio === 'Reprobado'
+  }">
+          <!-- Mostrar botón si el estado es "En recuperación" -->
+          <!-- Botón “Nota Recuperación” solo si CF en [5.5, 7) o estado = "En recuperación" -->
+          <ng-container *ngIf="est.estadoAprobatorio === 'En recuperación'; else estadoTexto">
+            <button class="btn btn-secondary btn-sm ms-2" (click)="editarEstudiante(i, true)">
+              Recuperación
+            </button>
+          </ng-container>
+
+          <!-- Mostrar texto si el estado no es "En recuperación" -->
+          <ng-template #estadoTexto>
+            {{ est.estadoAprobatorio }}
+          </ng-template>
+        </td>
+<td>
+        <!-- Botón “Actualizar” para siempre -->
+        <button class="btn btn-warning btn-sm" (click)="editarEstudiante(i)">
+          Actualizar
+        </button>
+
+
+
+
+        <!-- Botón Eliminar -->
+        <button class="btn btn-danger btn-sm ms-2" (click)="eliminarEstudiante(i)">
+          Eliminar
+        </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr />
+
+  <!-- FORMULARIO (3 columnas): Datos del Estudiante, Notas Parciales, Examen Recuperación -->
+  <div class="row mt-4">
+    <!-- Col: Datos del Estudiante -->
+    <div class="col-md-4">
+      <h5>Datos del Estudiante</h5>
+      <div class="mb-2">
+        <label for="cedula">Cédula</label>
+        <input id="cedula" type="text" class="form-control" [(ngModel)]="estudianteForm.cedula" name="cedula" />
+      </div>
+      <div class="mb-2">
+        <label for="nombres">Nombres</label>
+        <input id="nombres" type="text" class="form-control" [(ngModel)]="estudianteForm.nombres" name="nombres" />
+      </div>
+      <div class="mb-2">
+        <label for="apellidos">Apellidos</label>
+        <input id="apellidos" type="text" class="form-control" [(ngModel)]="estudianteForm.apellidos"
+          name="apellidos" />
+      </div>
+      <div class="mb-2">
+        <label for="sexo">Sexo</label>
+        <select id="sexo" class="form-select" [(ngModel)]="estudianteForm.sexo" name="sexo">
+          <option value="M">Masculino</option>
+          <option value="F">Femenino</option>
+        </select>
+      </div>
+      <div class="mb-2">
+        <label>Fecha Nacimiento</label>
+        <input type="date" class="form-control" [(ngModel)]="estudianteForm.fechaNacimiento" name="fechaNac" />
+      </div>
+      <div class="mb-2">
+        <label for="codigo">Código</label>
+        <input id="codigo" type="text" class="form-control" [(ngModel)]="estudianteForm.codigo" name="codigo" />
+      </div>
+    </div>
+
+    <!-- Col: Notas Parciales -->
+    <div class="col-md-3">
+      <h5>Notas Parciales</h5>
+      <div class="mb-2">
+        <label for="p1">Parcial 1</label>
+        <input id="p1" type="number" class="form-control" [(ngModel)]="estudianteForm.parcial1" name="parcial1"
+          step="0.1" />
+      </div>
+      <div class="mb-2">
+        <label for="p2">Parcial 2</label>
+        <input id="p2" type="number" class="form-control" [(ngModel)]="estudianteForm.parcial2" name="parcial2"
+          step="0.1" />
+      </div>
+
+      <!-- Botones -->
+      <button class="btn btn-primary mt-2" (click)="guardarEstudiante()">
+        {{ editIndex === null ? 'Agregar' : 'Actualizar' }}
+      </button>
+      <button class="btn btn-secondary mt-2 ms-2" (click)="cancelarEdicion()">
+        Cancelar
+      </button>
+    </div>
+
+    <!-- Col: Examen de Recuperación (sólo si requiereRecuperacion) -->
+    <div class="col-md-4" *ngIf="requiereRecuperacion">
+      <h5>Examen de Recuperación</h5>
+      <div class="mb-2">
+        <label>Nota ER</label>
+        <input type="number" class="form-control" [(ngModel)]="estudianteForm.examenRecuperacion"
+          name="examenRecuperacion" step="0.1" />
+      </div>
+    </div>
+  </div>
+</div>
